@@ -7,6 +7,12 @@ Get instant, detailed loss prevention information for any North American (+1) ph
 - Absolute accuracy - data is sourced directly from the CNAC and NANPA, and I strive to update it bi-yearly.
 - API access for easy integration with your existing systems.
 
+# Live Example
+
+Try looking up a phone number using my live API here:
+
+http://3.19.71.179:8080/lookup/+14168573483
+
 # Example
 
 GET http://localhost:8080/lookup/+14164385639
