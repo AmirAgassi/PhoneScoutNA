@@ -11,6 +11,6 @@ Get instant, detailed loss prevention information for any North American (+1) ph
 
 GET http://localhost:8080/lookup/+14164385639
 
-```
+```json
 {"NPA":"416","NXX":"438","Thousands":"","State":"ON","Company":"Bell Canada","OCN":"8051","Ratecenter":"Toronto","CLLI":"TOROON50DS0","Assign Date":"00/00/0000","Prefix Type":"ICO","Switch Name":"","Switch Type":"Northern Telecom DMS100 (Digital) Host","LATA":"888","Country":"CA"}
 ```
