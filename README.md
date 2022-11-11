@@ -7,6 +7,10 @@ Get instant, detailed loss prevention information for any North American (+1) ph
 - Absolute accuracy - data is sourced directly from the CNAC and NANPA, and I strive to update it bi-yearly.
 - API access for easy integration with your existing systems.
 
+# Disclaimer
+
+These results are not number-portability aware. Due to regulations in Canada, local number portabiliy data for Canadian phone numbers are not available without approval from the Canadian Local Number Portability Consortium (CLNPC).
+
 # Live Example
 
 Try looking up a phone number using my live API here:
