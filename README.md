@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://i.imgur.com/ZBANUxW.png">
+</p>
+
 # PhoneScoutNA
 Get instant, detailed loss prevention information for any North American (+1) phone number with data sourced directly from the CNAC and NANPA.
 
