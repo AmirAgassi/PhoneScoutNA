@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://i.imgur.com/ZBANUxW.png">
+  <img src="https://i.imgur.com/5hAQVqQ.png">
 </p>
 
 # PhoneScoutNA
