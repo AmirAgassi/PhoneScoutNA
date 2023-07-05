@@ -1,0 +1,20 @@
+{
+  "name": "phonescoutna",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">\r   <img src=\"https://i.imgur.com/ga5uWf2.png\">\r </p>",
+  "main": "app.js",
+  "scripts": {
+    "run": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmirAgassi/PhoneScoutNA.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AmirAgassi/PhoneScoutNA/issues"
+  },
+  "homepage": "https://github.com/AmirAgassi/PhoneScoutNA#readme"
+}

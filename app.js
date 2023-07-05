@@ -48,17 +48,8 @@ app.get('/lookup/:phonenumber', (req,res) => {
 
 
 var data = [];
-fs.createReadStream('cellprovider-data-detailed_0.csv')
-  .pipe(csv())
-  .on('data', (row) => {
-    data.push(row)
-});
-fs.createReadStream('cellprovider-data-detailed_1.csv')
-  .pipe(csv())
-  .on('data', (row) => {
-    data.push(row)
-});
-fs.createReadStream('cellprovider-data-detailed_2.csv')
+
+fs.createReadStream('nanpa-sort-thousands.csv')
   .pipe(csv())
   .on('data', (row) => {
     data.push(row)
