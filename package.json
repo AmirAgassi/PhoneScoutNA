@@ -12,7 +12,8 @@
   },
   "dependencies": {
   "express": "^4.17.1",
-  "csv-parser": "^3.0.0"
+  "csv-parser": "^3.0.0",
+  "cors": "^2.8.5"
   },
   "keywords": [],
   "author": "",
