@@ -15,11 +15,15 @@ Get instant, detailed loss prevention information for any North American (+1) ph
 
 These results are not number-portability aware. Due to regulations in Canada, local number portabiliy data for Canadian phone numbers are not available without approval from the Canadian Local Number Portability Consortium (CLNPC).
 
+Since the full CSV file is too large to fit on GitHub directly, it will be downloaded by the script on runtime.
+
 # Live Example
 
 Try looking up a phone number using my live API here:
 
-http://3.19.71.179:8080/lookup/+14168573483
+https://amiragassi.github.io/Advanced-Phone-Lookup/
+
+https://nexuslinksoftwares-a7cc4c050fd6.herokuapp.com/lookup/+14168573483
 
 # Example
 
