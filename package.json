@@ -10,6 +10,9 @@
     "type": "git",
     "url": "git+https://github.com/AmirAgassi/PhoneScoutNA.git"
   },
+  "dependencies": {
+  "express": "^4.17.1"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
