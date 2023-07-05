@@ -2,7 +2,7 @@ const app = require('express')();
 const csv = require('csv-parser');
 const fs = require('fs');
 
-const PORT = 8080;
+const PORT = process.env.PORT;
 const cors = require('cors');
 
 app.use(cors());
