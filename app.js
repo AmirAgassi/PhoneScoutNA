@@ -49,7 +49,7 @@ app.get('/lookup/:phonenumber', (req,res) => {
 
 var data = [];
 
-fs.createReadStream('nanpa-sort-thousands.csv')
+fs.createReadStream('test_sample.csv')
   .pipe(csv())
   .on('data', (row) => {
     data.push(row)
