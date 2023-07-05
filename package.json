@@ -11,9 +11,14 @@
     "url": "git+https://github.com/AmirAgassi/PhoneScoutNA.git"
   },
   "dependencies": {
-  "express": "^4.17.1",
-  "csv-parser": "^3.0.0",
-  "cors": "^2.8.5"
+    "axios": "^1.4.0",
+    "cheerio": "^1.0.0-rc.12",
+    "cors": "^2.8.5",
+    "csv-parser": "^3.0.0",
+    "express": "^4.17.1",
+    "form-data": "^4.0.0",
+    "googleapis": "^120.0.0",
+    "node-fetch": "^2.6.12"
   },
   "keywords": [],
   "author": "",

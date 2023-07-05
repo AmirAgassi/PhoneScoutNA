@@ -2,6 +2,9 @@ const app = require('express')();
 const csv = require('csv-parser');
 const fs = require('fs');
 
+const cheerio = require('cheerio');
+
+
 const PORT = process.env.PORT;
 const cors = require('cors');
 
@@ -12,6 +15,46 @@ function numberWithSpaces(value, pattern) {
     return pattern.replace(/#/g, _ => phone[i++]);
 }
   
+const axios = require('axios');
+const https = require('https');
+
+const fileId = '1osLQ59pZ93RKo_rp6JKoIEwupCi7Jqak';
+const url = `https://drive.google.com/uc?export=download&id=${fileId}`;
+axios.get(url).then(response => {
+    const $ = cheerio.load(response.data);
+    const confirmToken = $('a').first().attr('href').split('=')[2];
+
+    const downloadUrl = `${url}&confirm=${confirmToken}`;
+    
+    axios({
+        url: downloadUrl,
+        method: 'GET',
+        responseType: 'stream',
+        httpsAgent: new https.Agent({  
+            rejectUnauthorized: false
+        }),
+    }).then(
+        response =>
+            new Promise((resolve, reject) => {
+                response.data
+                    .pipe(fs.createWriteStream('nanpa-sorta-thousands.csv'))
+                    .on('finish', () => resolve())
+                    .on('error', e => reject(e));
+            }),
+    ).then(() => {
+        console.log('File downloaded successfully')
+        fs.createReadStream('nanpa-sorta-thousands.csv')
+          .pipe(csv())
+          .on('data', (row) => {
+            data.push(row)
+          })
+          .on('end', () => {
+            console.log('CSV file successfully processed, ready for use.');
+        });
+
+    })
+    .catch(error => console.log(`Failed to download file due to error ${error}`));
+}).catch(error => console.log(`Failed to get the confirm token due to error ${error}`));
 
 app.get('/', (req,res) => {
     res.status(200).send("Hello!")
@@ -48,16 +91,6 @@ app.get('/lookup/:phonenumber', (req,res) => {
 
 
 var data = [];
-
-fs.createReadStream('test_sample.csv')
-  .pipe(csv())
-  .on('data', (row) => {
-    data.push(row)
-  })
-  .on('end', () => {
-    console.log('CSV file successfully processed, ready for use.');
-});
-
 
 app.listen(
     PORT,
