@@ -63,9 +63,7 @@ app.get('/', (req,res) => {
 app.get('/lookup/:phonenumber', (req,res) => {
     var phonenumber = req.params['phonenumber'];
     phonenumber = phonenumber.replace('%20', '+');
-    if (phonenumber.slice(0,1) !== "+") {
-        phonenumber = "+" + phonenumber;
-    }
+    phonenumber = phonenumber.replace(' ', '+');
     console.log(phonenumber)
     if (phonenumber.slice(0,2) != "+1" && phonenumber.length != 11) {
         res.status(200).send({'Company':'country_not_supported'}) 
