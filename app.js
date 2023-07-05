@@ -62,7 +62,7 @@ app.get('/', (req,res) => {
 
 app.get('/lookup/:phonenumber', (req,res) => {
     var phonenumber = req.params['phonenumber'];
-    if (phonenumber.slice(0,2) != "+1" && phonenumber.length != 11) {
+    if (phonenumber.slice(0,2) != "+1" || phonenumber.slice(0,2) != "+%201" && phonenumber.length != 11) {
         res.status(200).send({'Company':'country_not_supported'}) 
     }
     var NPA = phonenumber.slice(2, 5)
