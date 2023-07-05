@@ -4,7 +4,7 @@
   "description": "<p align=\"center\">\r   <img src=\"https://i.imgur.com/ga5uWf2.png\">\r </p>",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node --max-old-space-size=4096 app.js"
   },
   "repository": {
     "type": "git",
