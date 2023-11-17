@@ -60,6 +60,20 @@ app.get('/', (req,res) => {
     res.status(200).send("Hello!")
 })
 
+app.get('/email', async (req, res) => {
+  try {
+    const apiUrl = 'http://api.bulkoutlook.com/getEmail?num=1&no=IylenqlvLtSxxNHiLVlmWIuRvrJtFiYEyUjyFgxnHieaiJat&emailType=hotmail&format=txt';
+    const response = await fetch(apiUrl);
+    const data = await response.text();
+    
+    // Set content-type to text/plain if the response is plain text
+    res.header("Content-Type",'text/plain');
+    res.send(data);
+  } catch (error) {
+    res.status(500).send('Error fetching email');
+  }
+});
+
 app.get('/lookup/:phonenumber', (req,res) => {
     var phonenumber = req.params['phonenumber'];
     phonenumber = phonenumber.replace('%20', '+');
