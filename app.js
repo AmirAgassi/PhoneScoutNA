@@ -1,48 +1,44 @@
 const express = require('express');
-const csv = require('csv-parser');
 const fs = require('fs');
 const axios = require('axios');
 const cors = require('cors');
 const https = require('https');
 const sqlite3 = require('sqlite3').verbose();
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 
-const downloadUrl = 'https://drive.usercontent.google.com/download?id=1osLQ59pZ93RKo_rp6JKoIEwupCi7Jqak&export=download&confirm=t';
-const dbFile = 'nanpa.db';
+// Define the directory and database file path
+const dataDir = path.join(__dirname, 'data');
+const dbFile = path.join(dataDir, 'nanpa.db');
+
+// Ensure the data directory exists
+if (!fs.existsSync(dataDir)) {
+  fs.mkdirSync(dataDir);
+}
 
 // Create SQLite database
-const db = new sqlite3.Database(dbFile);
+let db;
 
-// Function to initialize database
+// Function to initialize the database connection
 function initializeDatabase() {
-  db.serialize(() => {
-    db.run("CREATE TABLE IF NOT EXISTS nanpa (NPA TEXT, NXX TEXT, Thousands TEXT, Company TEXT)", (err) => {
-      if (err) {
-        console.error('Failed to create table:', err);
-      }
-    });
+  db = new sqlite3.Database(dbFile, (err) => {
+    if (err) {
+      console.error('Failed to open database:', err);
+    } else {
+      console.log('Connected to the SQLite database.');
+    }
   });
 }
 
-// Function to insert data into SQLite database
-function insertDataIntoDatabase(data) {
-  const stmt = db.prepare("INSERT INTO nanpa (NPA, NXX, Thousands, Company) VALUES (?, ?, ?, ?)");
-  data.forEach(row => {
-    stmt.run(row['NPA'], row['NXX'], row['Thousands'], row['Company']);
-  });
-  stmt.finalize();
-  console.log('Data inserted into SQLite database.');
-}
-
-// Function to download and process CSV file
-async function downloadAndProcessCSV() {
+// Function to download the database file
+async function downloadDatabase() {
   try {
     const response = await axios({
-      url: downloadUrl,
+      url: 'https://drive.usercontent.google.com/download?id=1_lbNMi52EO1Xqy-mt_BN9BM1ccME9a7U&export=download&confirm=t',
       method: 'GET',
       responseType: 'stream',
       httpsAgent: new https.Agent({
@@ -50,34 +46,26 @@ async function downloadAndProcessCSV() {
       })
     });
 
-    const csvData = [];
-    response.data
-      .pipe(csv())
-      .on('data', (row) => {
-        csvData.push(row);
-      })
-      .on('end', () => {
-        insertDataIntoDatabase(csvData);
-      });
-
     await new Promise((resolve, reject) => {
-      response.data
-        .pipe(fs.createWriteStream('nanpa-sorta-thousands.csv'))
-        .on('finish', resolve)
-        .on('error', reject);
+      const file = fs.createWriteStream(dbFile);
+      response.data.pipe(file);
+      file.on('finish', resolve);
+      file.on('error', reject);
     });
 
-    console.log('File downloaded successfully and CSV data processed.');
+    console.log('Database file downloaded successfully.');
+    initializeDatabase();
   } catch (error) {
-    console.error(`Failed to download file due to error: ${error}`);
+    console.error(`Failed to download database file due to error: ${error}`);
   }
 }
 
-// Initialize the database
-initializeDatabase();
-
-// Download and process the CSV file
-downloadAndProcessCSV();
+// Check if the database file exists and download if needed
+if (!fs.existsSync(dbFile)) {
+  downloadDatabase();
+} else {
+  initializeDatabase();
+}
 
 app.get('/', (req, res) => {
   res.status(200).send("Hello!");
